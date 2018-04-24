@@ -29,17 +29,21 @@ export class Autenticacao {
             })
     }
 
-    public autenticar (email: string, senha: string): void{
+    public autenticar (email: string, senha: string): Promise<any> {
 
-        firebase.auth().signInWithEmailAndPassword(email, senha)
-            .then((resposta: any) => {
-                firebase.auth().currentUser.getIdToken()
-                    .then((idToken: string) => {
-                        this.token_id = idToken
-                        localStorage.setItem('idToken', idToken)
-                        this.router.navigate(['/home'])})
-            })
-            .catch((error: Error) => {console.log(error)})
+        return new Promise((resolve, reject) => {
+
+            firebase.auth().signInWithEmailAndPassword (email, senha)
+                    .then((resposta: any) => {
+                        firebase.auth().currentUser.getIdToken()
+                            .then((idToken: string) => {
+                                this.token_id = idToken
+                                localStorage.setItem('idToken', idToken)
+                                this.router.navigate(['/home'])})
+                    })
+            .catch((error: Error) => reject(error))
+
+        })
 
     }
 

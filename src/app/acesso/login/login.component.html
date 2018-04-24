@@ -19,11 +19,11 @@
           formControlName="senha"
         >
       </div>
-      <button type="submit" class="btn btn-primary btn-sm btn-block">Entrar</button>
+      <button type="submit" class="btn btn-primary btn-sm btn-block">Log in</button>
     </form>
     <hr />
 
-    <p class="small text-danger text-center">O nome de usuário inserido não pertence a uma conta. Verifique seu nome de usuário e tente novamente.</p>
+    <p class="small text-danger text-center">{{ errorLogin }}</p>
 
   </div>
 </div>
@@ -31,7 +31,7 @@
 <div class="card" style="width: 20rem;">
   <div class="card-body">
     <p class="card-text">
-      Não tem uma conta? <a href="#" (click)="exibirPainelCadastro()" class="card-link">Cadastre-se</a>
+      Don't have an account? <a href="#" (click)="exibirPainelCadastro()" class="card-link">Sign in up</a>
     </p> 
   </div>
 </div>

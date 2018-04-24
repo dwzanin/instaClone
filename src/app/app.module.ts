@@ -16,6 +16,8 @@ import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
@@ -35,9 +37,13 @@ import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-pu
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    NgbModule.forRoot()
   ],
-  providers: [Autenticacao, AutenticacaoGuard, Bd, Progresso],
+  entryComponents: [
+    IncluirPublicacaoComponent
+  ],
+  providers: [Autenticacao, AutenticacaoGuard, Bd, Progresso, NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,11 +1,12 @@
- <div class="row" *ngFor="let publicacao of publicacoes">
+ <div class="row" *ngFor="let publicacao of publicacoes"  [@animacao-post]="publicacao.estado">
     <div class="col d-flex justify-content-center">
       <div class="card">
         <div class="card-body">
           <p class="card-text"><strong>{{ publicacao.nome_usuario }}</strong></p>
         </div>
 
-        <img class="card-img" [src]="publicacao.url_imagem || ''"/>
+        <img class="card-img" [src]="publicacao.url_imagem || ''"
+             (load)="publicacao.estado = 'criado'"/>
 
         <div class="card-body">
           <p class="card-text">

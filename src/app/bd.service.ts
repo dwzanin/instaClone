@@ -12,7 +12,15 @@ export class Bd {
         firebase.database().ref(`publicacoes/${btoa(publicacao.email)}`)
             .push({ titulo: publicacao.titulo})
             .then((resposta) => {
+
                 let nomeImagem = resposta.key
+
+                //consultar o nome do usuario
+                firebase.database().ref(`usuario_detalhe/${btoa(publicacao.email)}`)
+                    .once('value')
+                    .then( (snapshot: any) =>{
+                        this.progresso.nome_usuario = snapshot.val().nome_usuario
+                })
 
                 firebase.storage().ref()
                     .child(`imagens/${nomeImagem}`)
@@ -29,7 +37,15 @@ export class Bd {
                         },
                         //finalização processo
                         () => {
-                            this.progresso.status = 'concluido'
+
+                            firebase.storage().ref()
+                                .child(`imagens/${nomeImagem}`)
+                                .getDownloadURL()
+                                .then((url: string) => {
+                                    this.progresso.url_imagem = url
+                                    this.progresso.status = 'concluido'
+                                })
+                                
                         }
                     )
             })
