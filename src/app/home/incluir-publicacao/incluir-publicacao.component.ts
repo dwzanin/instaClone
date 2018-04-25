@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Progresso } from '../../progresso.service';
 import { Bd } from '../../bd.service'; 
 
@@ -21,13 +21,15 @@ export class IncluirPublicacaoComponent implements OnInit {
   public email: string
   private imagem: any
 
+  public ulrImg: string = 'Choose a image'
+
   public progressoPublicacao: string = 'pendente'
   public porcentagemUpload: number
 
   public closeResult: string;
 
   public formulario: FormGroup = new FormGroup({
-    'titulo': new FormControl(null)
+    'titulo': new FormControl(null, Validators.required)
   })
 
   constructor(private bd: Bd, private progresso: Progresso, public activeModal: NgbActiveModal) {}
@@ -37,6 +39,11 @@ export class IncluirPublicacaoComponent implements OnInit {
   }
 
   public publicar(): void{
+
+    if (this.formulario.invalid){
+      this.formulario.get('titulo').markAsTouched()
+      return
+    }
 
     this.bd.publicar( {email: this.email,
                       titulo: this.formulario.value.titulo,
@@ -73,7 +80,11 @@ export class IncluirPublicacaoComponent implements OnInit {
   }
 
   public preparaImagemUpload(evento: Event): void{
-    this.imagem = (<HTMLInputElement>evento.target).files;
+
+    if ((<HTMLInputElement>evento.target).files.length > 0){
+      this.imagem = (<HTMLInputElement>evento.target).files
+      this.ulrImg = this.imagem.item(0).name
+    }
   }
 
 }

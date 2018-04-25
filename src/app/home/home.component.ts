@@ -29,7 +29,9 @@ export class HomeComponent implements OnInit {
   
   open() {
     const modalRef = this.modalService.open(IncluirPublicacaoComponent)
-      .result.then((result) => this.atualizarTimeLine(result))
+      .result.then((result) => this.atualizarTimeLine(result),
+                    () => {})//noerror dismiss  
+      
   }
 
 }

@@ -1,7 +1,32 @@
+/* Esconde o input */
+input[type='file'] {
+    display: none
+  }
+
+  /* Aparência que terá o seletor de arquivo */
+label {
+    cursor: pointer;
+    margin: 10px;
+  }
+
 .inputFile {
     margin-top: 15px;
+    display: none;
 }
 
-.btn {
-    width: 125px;
+.modal-body-dow  {
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.urlSpan {
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+    padding-top: 5px
+}
+
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+    border: 1px solid red;
 }
